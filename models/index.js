@@ -19,6 +19,7 @@ fs.readdirSync(__dirname)
   })
   .forEach((file) => {
     let model = sequelize['import'](path.join(__dirname, file));
+    console.log('tere bina  '+model);
     db[model.name] = model;
   });
 

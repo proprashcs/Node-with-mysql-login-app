@@ -1,5 +1,6 @@
 const { Company } = require('../models');
 const { to, ReE, ReS } = require('../services/util.service');
+const models = require("../models/index");
 
 const create = async function(req, res){
     let err, company;
@@ -7,7 +8,12 @@ const create = async function(req, res){
 
     let company_info = req.body;
 
-
+    //   models.sequelize.query("SELECT * FROM `users`", { type: models.sequelize.QueryTypes.SELECT})
+    //   .then(users => {
+    //     console.log('----------222--------')
+    //       console.log(users);
+    //     // We don't need spread here, since only the results will be returned for select queries
+    //   })
     [err, company] = await to(Company.create(company_info));
     if(err) return ReE(res, err, 422);
 
