@@ -15,11 +15,11 @@ const sequelize = new Sequelize(CONFIG.db_name, CONFIG.db_user, CONFIG.db_passwo
 
 fs.readdirSync(__dirname)
   .filter((file) => {
+    console.log(__dirname);
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach((file) => {
     let model = sequelize['import'](path.join(__dirname, file));
-    console.log('tere bina  '+model);
     db[model.name] = model;
   });
 

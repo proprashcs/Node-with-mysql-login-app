@@ -4,6 +4,7 @@ const router 			= express.Router();
 const UserController 	= require('../controllers/user.controller');
 const CompanyController = require('../controllers/company.controller');
 const HomeController 	= require('../controllers/home.controller');
+const ContentPartnerController 	= require('../controllers/contentpartner.controller');
 
 const custom 	        = require('./../middleware/custom');
 
@@ -31,7 +32,9 @@ router.get(     '/companies/:company_id', passport.authenticate('jwt', {session:
 router.put(     '/companies/:company_id', passport.authenticate('jwt', {session:false}), custom.company, CompanyController.update);  // U
 router.delete(  '/companies/:company_id', passport.authenticate('jwt', {session:false}), custom.company, CompanyController.remove);  // D
 
-router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
+router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard);
+router.get('/contentpartner', passport.authenticate('jwt', {session:false}),ContentPartnerController.getAll);
+router.delete(  '/contentpartner/:id', passport.authenticate('jwt', {session:false}), custom.CP, ContentPartnerController.remove);  // D
 
 
 //********* API DOCUMENTATION **********

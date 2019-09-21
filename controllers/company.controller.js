@@ -1,13 +1,19 @@
 const { Company } = require('../models');
 const { to, ReE, ReS } = require('../services/util.service');
-const models = require("../models/index");
+// const models = require("../models/index");
 
 const create = async function(req, res){
     let err, company;
     let user = req.user;
 
     let company_info = req.body;
-
+    // models.sequelize.query("select * from companies").then(([results, metadata]) => {
+    //     console.log(results);
+    //     console.log('----------000--------')
+    //     console.log(metadata);
+    //     // Results will be an empty array and metadata will contain the number of affected rows.
+    //   });
+   
     //   models.sequelize.query("SELECT * FROM `users`", { type: models.sequelize.QueryTypes.SELECT})
     //   .then(users => {
     //     console.log('----------222--------')
@@ -36,7 +42,10 @@ const getAll = async function(req, res){
     [err, companies] = await to(user.getCompanies({include: [ {association: Company.Users} ] }));
 
     let companies_json =[]
+    console.log('companies');
+console.log(companies);
     for( let i in companies){
+
         let company = companies[i];
         let users =  company.Users;
         let company_info = company.toWeb();
@@ -50,7 +59,7 @@ const getAll = async function(req, res){
         companies_json.push(company_info);
     }
 
-    console.log('c t', companies_json);
+    // console.log('c t', companies_json);
     return ReS(res, {companies:companies_json});
 }
 module.exports.getAll = getAll;

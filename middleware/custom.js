@@ -21,3 +21,13 @@ let company = async function (req, res, next) {
     next();
 }
 module.exports.company = company;
+
+let CP = async function (req, res, next) {
+    let id;
+    id = req.params.id;
+
+
+    req.id = id;
+    next();
+}
+module.exports.CP = CP;
